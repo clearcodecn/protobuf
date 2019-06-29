@@ -440,14 +440,14 @@ func (g *grpc) generateServerSignature(servName string, method *pb.MethodDescrip
 	var reqArgs []string
 	ret := "error"
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
-		reqArgs = append(reqArgs, contextPkg+".Context")
+		reqArgs = append(reqArgs,"ctx " + contextPkg+".Context")
 		ret = "(*" + g.typeName(method.GetOutputType()) + ", error)"
 	}
 	if !method.GetClientStreaming() {
-		reqArgs = append(reqArgs, "*"+g.typeName(method.GetInputType()))
+		reqArgs = append(reqArgs, "in *"+g.typeName(method.GetInputType()))
 	}
 	if method.GetServerStreaming() || method.GetClientStreaming() {
-		reqArgs = append(reqArgs, servName+"_"+generator.CamelCase(origMethName)+"Server")
+		reqArgs = append(reqArgs, "serv " + servName+"_"+generator.CamelCase(origMethName)+"Server")
 	}
 
 	return methName + "(" + strings.Join(reqArgs, ", ") + ") " + ret
