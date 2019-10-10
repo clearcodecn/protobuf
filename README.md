@@ -12,7 +12,7 @@ This package and the code it generates requires at least Go 1.9.
 This software implements Go bindings for protocol buffers.  For
 information about protocol buffers themselves, see
 	https://developers.google.com/protocol-buffers/
-
+   
 ## Installation ##
 
 To use this software, you must:
